@@ -1,0 +1,51 @@
+---
+- name: Source input plist from file on disk
+  set_fact:
+    filevault_input_plist_content: "{{lookup('file', filevault_input_plist ) }}"
+# end of block
+  when: filevault_input_plist is defined and filevault_input_plist != ''
+  delegate_to: localhost
+
+
+- block:
+  - block:
+    - include_tasks: tasks/check_additional_users.yml
+
+    - name: Build list of additional users to add to FileVault
+      set_fact:
+        additional_users_plist: "{{ additional_users_plist | default('')}}
+                                <dict>
+                                  <key>Username</key><string>{{ item.username }}</string>
+                                  <key>Password</key><string>{{ item.password }}</string>
+                                </dict>"
+      loop: "{{ filevault_additional_users_and_passwords }}"
+      delegate_to: localhost
+
+    - name: List of users to add to FileVault
+      debug:
+        var: additional_users_plist
+      when: verbose | bool
+      delegate_to: localhost
+    # end block
+    when: filevault_additional_users_and_passwords != []
+
+  - name: Add Default FileVault Username and Password to the input plist
+    set_fact:
+      filevault_input_plist_content: "<plist>
+                                        <dict>
+                                          <key>Username</key><string>{{ filevault_user | mandatory }}</string>
+                                          <key>Password</key><string>{{ filevault_user_password | mandatory }}</string>
+                                          <key>AdditionalUsers</key>
+                                            <array>
+                                            {{ additional_users_plist | default('') }}
+                                            </array>
+                                          </dict>
+                                        </plist>"
+    delegate_to: localhost
+  # end of block
+  when: filevault_input_plist is not defined or filevault_input_plist == ''
+
+- name: Final input plist
+  debug:
+    var: filevault_input_plist_content
+  when: verbose | bool

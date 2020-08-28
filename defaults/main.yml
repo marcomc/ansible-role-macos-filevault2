@@ -1,0 +1,29 @@
+---
+verbose: no
+filevault_user: "{{ ansible_user_id }}"
+filevault_user_password: "{{ ansible_become_pass }}"
+filevault_additional_users_and_passwords: []
+  # - { username: "testuser6", password: "testest" }
+  # - { username: "testuser7", password: "testest2" }
+filevault_input_plist: '' # useful if you want to deploy a static plist file
+filevault_keychain: no
+filevault_keychain_file: '' # ignored if institutional_type is 'certificate'
+filevault_keychain_file_override: no # Overwrite any existing copy '/Library/Keychains/FileVaultMaster.keychain'
+
+# if you select keychain make sure to previously install '/Library/Keychains/FileVaultMaster.keychain'
+filevault_certificate: no
+filevault_certificate_file: "" # ignored if institutional_type is 'keychain'
+
+filevault_norecoverykey: no
+
+filevault_outputplist: no
+filevault_defer: no
+filevault_defer_file: "/dev/null"
+filevault_showrecoverykey: no
+filevault_recovery_key_output_file: "~/Desktop/{{ ansible_hostname }}-presonal-recovery-key.txt" # the path where to save the Personal Recovery Key generate by FileVault2
+filevault_dontaskatlogout: no
+
+filevault_forcerestart: no
+filevault_authrestart: no
+filevault_forceatlogin: no
+filevault_max_cancel_attempts: '-1' # (-1: ignore this option, 0=next time, 9999=only request, not force).

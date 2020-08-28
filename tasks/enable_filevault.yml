@@ -1,0 +1,49 @@
+---
+- block:
+  - name: Enable FileVault2
+    command:
+      argv:
+        - fdesetup
+        - enable
+        - "{{ '-outputplist'                 if ( filevault_outputplist|bool ) }}"
+        - "{{ '-forcerestart'                if ( filevault_forcerestart|bool ) }}"
+        - "{{ '-authrestart'                 if ( filevault_authrestart|bool ) }}"
+        - "{{ '-keychain'                    if ( filevault_keychain|bool ) }}"
+        - "{{ '-certificate'                 if ( filevault_certificate|bool and filevault_certificate_file != '' ) }}"
+        - "{{ filevault_certificate_file     if ( filevault_certificate|bool and filevault_certificate_file != '' ) }}"
+        - "{{ '-defer'                       if ( filevault_defer|bool ) }}"
+        - "{{ filevault_defer_file           if ( filevault_defer|bool ) }}"
+        - "{{ '-forceatlogin'                if ( filevault_defer|bool and filevault_forceatlogin|bool and filevault_max_cancel_attempts >= 0 ) }}"
+        - "{{ filevault_max_cancel_attempts  if ( filevault_defer|bool and filevault_forceatlogin|bool and filevault_max_cancel_attempts >= 0 ) }}"
+        - "{{ '-dontaskatlogout'             if ( filevault_defer|bool and filevault_dontaskatlogout|bool ) }}"
+        - "{{ '-showrecoverykey'             if ( filevault_defer|bool and filevault_showrecoverykey|bool ) }}"
+        - "{{ '-norecoverykey'               if ( filevault_norecoverykey|bool ) }}"
+        - "{{ '-forcerestart'                if ( filevault_forcerestart|bool ) }}"
+        - "{{ '-verbose'                     if ( verbose|bool ) }}"
+        - -inputplist
+      stdin: "{{ filevault_input_plist_content }}"
+    register: fdesetup_result
+    ignore_errors: yes
+  become: yes
+
+- debug:
+    msg: "{{ fdesetup_result }}"
+  when: verbose | bool
+
+- name: Storing the Personal Recovery Key in {{ filevault_recovery_key_output_file }}
+  copy:
+    content: "{{ fdesetup_result.stdout }}"
+    dest: "{{ filevault_recovery_key_output_file }}"
+    force: yes
+  when:
+    - fdesetup_result is defined
+    - not fdesetup_result.failed
+    - not filevault_norecoverykey|bool
+  delegate_to: localhost
+
+- name: Error trying to enable FileVault2
+  debug:
+    var: fdesetup_result.stderr_lines
+  when:
+    - fdesetup_result.failed
+    - fdesetup_result.stderr_lines is defined

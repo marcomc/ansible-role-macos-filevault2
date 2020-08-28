@@ -1,0 +1,17 @@
+---
+- name: Verify that all the additional users exist
+  command: id {{ item.username }}
+  register: command_results
+  loop: "{{ filevault_additional_users_and_passwords }}"
+  when: filevault_additional_users_and_passwords != []
+  ignore_errors: yes
+
+- name: List of users status
+  debug:
+    var: command_results
+  when: verbose | bool
+
+- name: FATAL - Additional uers list contains invalid usernames
+  fail:
+    msg: "Some of the additional users usersnames is not existing in this system"
+  when: command_results.failed is defined and command_results.failed|bool

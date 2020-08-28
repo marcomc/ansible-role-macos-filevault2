@@ -1,0 +1,23 @@
+---
+- name: FATAL - This system is family is {{ ansible_facts['os_family'] }}
+  fail:
+    msg: "This role is only compatible with macOS"
+  when: ansible_facts['os_family'] != 'Darwin'
+
+- name: Check if FileVault2 is already enabled
+  command: fdesetup status
+  register: fdesetup_status_result
+  changed_when: no
+
+- name: FileVault2 is already enabled
+  debug:
+    var: fdesetup_status_result.stdout_lines
+  when: fdesetup_status_result.stdout | regex_search("FileVault is On", ignorecase=True)
+
+- block:
+  - include_tasks: tasks/build_input_plist.yml
+  - include_tasks: tasks/deploy_keychain_file.yml
+    when: filevault_keychain|bool
+  - include_tasks: tasks/enable_filevault.yml
+  # end block
+  when: not (fdesetup_status_result.stdout | regex_search("FileVault is On", ignorecase=True))

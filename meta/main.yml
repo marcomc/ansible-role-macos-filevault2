@@ -1,0 +1,23 @@
+galaxy_info:
+  author: Marco Massari Calderone <marco@marcomc.com>
+  description: Ansible role to configure FileVault2 on OSX.
+  license: MIT
+  min_ansible_version: 2
+  platforms:
+    - name: MacOSX
+      versions:
+      - '10.7'
+      - '10.8'
+      - '10.9'
+      - '10.10'
+      - '10.11'
+      - '10.12'
+      - '10.13'
+      - '10.14'
+      - '10.15'
+  galaxy_tags:
+    - system
+    - security
+    - encryption
+    - filevault
+    - fdesetup
