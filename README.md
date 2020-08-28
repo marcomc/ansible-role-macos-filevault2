@@ -2,8 +2,6 @@
 
 This ansible role implements a subset of commands to `enable` (only) FileVault2 via `fdesetup` present on macOS v10.7 or newer systems.
 
-## Recovery Key
-
 ## Example Playbook
 ----------------
     - vars:
