@@ -34,7 +34,7 @@ The subset of `enable` options implement is
 each option has been mirrored to an ansible variable (and then there are a few extra variables for more features)
 ```
 verbose:                                  no
-filevault_user:                           "{{ ansible_user }}"
+filevault_user:                           "{{ ansible_user_id }}"
 filevault_user_password:                  "{{ ansible_become_pass }}"
 filevault_additional_users_and_passwords: []
   # - { username: "testuser6", password: "testest" }
@@ -63,7 +63,7 @@ you can obtain your preferred installation method toggling the options as if you
 
 ```
 # Example: Enable FileVault2 using a certificate without a generating a personal recovery key
-filevault_user:                           "{{ ansible_user }}"
+filevault_user:                           "{{ ansible_user_id }}"
 filevault_user_password:                  "{{ ansible_become_pass }}"
 filevault_additional_users_and_passwords:
   - { username: "testuser6", password: "testest" }
