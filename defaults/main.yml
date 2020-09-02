@@ -1,6 +1,6 @@
 ---
 verbose: no
-filevault_user: "{{ ansible_user_id }}"
+filevault_user: "{{ ansible_user }}"
 filevault_user_password: "{{ ansible_become_pass }}"
 filevault_additional_users_and_passwords: []
   # - { username: "testuser6", password: "testest" }
