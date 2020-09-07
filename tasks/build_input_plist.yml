@@ -13,7 +13,7 @@
 
     - name: Build list of additional users to add to FileVault
       set_fact:
-        additional_users_plist: "{{ additional_users_plist | default('')}}
+        additional_users_plist: "{{ additional_users_plist | default('') }}
                                 <dict>
                                   <key>Username</key><string>{{ item.username }}</string>
                                   <key>Password</key><string>{{ item.password }}</string>
@@ -43,7 +43,7 @@
                                         </plist>"
     delegate_to: localhost
   # end of block
-  when: filevault_input_plist is not defined or filevault_input_plist == ''
+  when: filevault_input_plist is not defined or filevault_input_plist | length == 0
 
 - name: Final input plist
   debug:
