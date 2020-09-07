@@ -3,7 +3,7 @@
   set_fact:
     filevault_input_plist_content: "{{ lookup('file', filevault_input_plist ) }}"
 # end of block
-  when: filevault_input_plist is defined and filevault_input_plist != ''
+  when: filevault_input_plist is defined and filevault_input_plist | length > 0
   delegate_to: localhost
 
 

@@ -12,5 +12,5 @@
       dest: '/Library/Keychains/FileVaultMaster.keychain'
       mode: '0644'
       force: "{{ filevault_keychain_file_override|bool }}"
-    when: filevault_keychain|bool and filevault_keychain_file|bool is defined and filevault_keychain_file != ''
+    when: filevault_keychain|bool and filevault_keychain_file|bool is defined and filevault_keychain_file | length > 0
   become: yes
