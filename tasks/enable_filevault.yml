@@ -35,6 +35,7 @@
     content: "{{ fdesetup_result.stdout }}"
     dest: "{{ filevault_recovery_key_output_file }}"
     force: yes
+    mode: '0644'
   when:
     - fdesetup_result is defined
     - not fdesetup_result.failed
