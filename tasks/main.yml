@@ -15,9 +15,9 @@
   when: fdesetup_status_result.stdout | regex_search("FileVault is On", ignorecase=True)
 
 - block:
-  - include_tasks: tasks/build_input_plist.yml
-  - include_tasks: tasks/deploy_keychain_file.yml
+  - include_tasks: build_input_plist.yml
+  - include_tasks: deploy_keychain_file.yml
     when: filevault_keychain|bool
-  - include_tasks: tasks/enable_filevault.yml
+  - include_tasks: enable_filevault.yml
   # end block
   when: not (fdesetup_status_result.stdout | regex_search("FileVault is On", ignorecase=True))
