@@ -96,7 +96,7 @@ You can generate a DER certificate manually:
   1. [Create a FileVault master keychain](https://support.apple.com/en-us/HT202385#create)
   2. export the ONLY the public certificate element to FileVaultRecoveryKey.cer
 
-Alternatively you can use the [tools/recovery-key-cert-generator.sh](https://github.com/marcomc/splinter/blob/master/tools/recovery_key_cert_generator.sh) script
+Alternatively you can use the [splinter-tools/recovery-key-cert-generator.sh](https://github.com/marcomc/splinter-tools/blob/master/recovery_key_cert_generator.sh) script
 > Make sure to save both the keychain and its password in a safe place (Bitwarden, LastPass, 1Password)
 
 The generate self-signed certificate will be named `FileVault Recovery Key (<your_hostname?)`.
