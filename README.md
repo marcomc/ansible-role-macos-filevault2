@@ -12,7 +12,7 @@ This ansible role implements a subset of commands to `enable` (only) FileVault2 
         filevault_showrecoverykey: yes
     - hosts: localhost
       roles:
-      - marcomc.filevault2
+      - marcomc.macos_filevault2
 
 ## Variables
 The subset of `enable` options implement is
