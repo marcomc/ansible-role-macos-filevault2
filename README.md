@@ -123,7 +123,7 @@ sudo scutil --set HostName "${ORIGINAL_HOSTNAME}"
 ```
 
 ### Keychain
-If you select keychain institutional recovery key make sure to previously generate the keychain file `FileVaultMaster.keychain` containing your recovery key and deploy it on your machine:
+If you select keychain institutional recovery key make sure to previously generate the keychain file `FileVaultMaster.keychain` containing your recovery key, __remove the private key__, and deploy it on your machine:
 
 1. [Create a FileVault master keychain](https://support.apple.com/en-us/HT202385#create)
 2. [Remove the private key from the master keychain](https://support.apple.com/en-us/HT202385#update)
