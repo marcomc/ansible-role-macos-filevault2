@@ -84,7 +84,7 @@ If you do not specify your own input plist (which is supposed to be the default 
 ## Set an `institutional` recovery key for computers in your organization
 you can chose to:
 * deploy a pre-generated Keychain recovery key
-* deploy a DER certificate that will add to Keychain recovery key generated on-the-fly
+* deploy a DER certificate that will be added to Keychain a recovery key generated on-the-fly
 
 ### Certificate
 Automatically create the institutional recovery key with the supplied certificate file
