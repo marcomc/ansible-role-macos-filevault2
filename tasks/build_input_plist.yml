@@ -7,8 +7,10 @@
   delegate_to: localhost
 
 
-- block:
-  - block:
+- name: Create Filevault plist input file
+  block:
+  - name: Compile list of users to allow FileVault2 for
+    block:
     - include_tasks: check_additional_users.yml
 
     - name: Build list of additional users to add to FileVault
@@ -24,7 +26,7 @@
     - name: List of users to add to FileVault
       debug:
         var: additional_users_plist
-      when: verbose | bool
+      when: verbose|bool
       delegate_to: localhost
     # end block
     when: filevault_additional_users_and_passwords != []
@@ -48,4 +50,4 @@
 - name: Final input plist
   debug:
     var: filevault_input_plist_content
-  when: verbose | bool
+  when: verbose|bool

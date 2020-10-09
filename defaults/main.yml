@@ -14,7 +14,8 @@ filevault_keychain_file_override: no # Overwrite any existing copy '/Library/Key
 filevault_certificate: no
 filevault_certificate_file: "" # ignored if institutional_type is 'keychain'
 
-filevault_norecoverykey: no
+filevault_norecoverykey: no # 'yes' specify that only the FileVaultMaster keychain is used as the recovery key
+                            # 'no' will generate a Personal Recovery Key
 
 filevault_outputplist: no
 filevault_defer: no

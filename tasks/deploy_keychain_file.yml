@@ -1,16 +1,9 @@
 ---
-- block:
-  # - name: Remove Prexisting '/Library/Keychains/FileVaultMaster.keychain'
-  #   file:
-  #     path: '/Library/Keychains/FileVaultMaster.keychain'
-  #     state: absent
-  #   when: filevault_keychain_file_override|bool
-
-  - name: Copy "{{ filevault_keychain_file }}" to '/Library/Keychains'
-    copy:
-      src: '{{ filevault_keychain_file }}'
-      dest: '/Library/Keychains/FileVaultMaster.keychain'
-      mode: '0644'
-      force: "{{ filevault_keychain_file_override|bool }}"
-    when: filevault_keychain|bool and filevault_keychain_file|bool is defined and filevault_keychain_file | length > 0
+- name: Copy "{{ filevault_keychain_file }}" to '/Library/Keychains'
+  copy:
+    src: '{{ filevault_keychain_file }}'
+    dest: '/Library/Keychains/FileVaultMaster.keychain'
+    mode: '0644'
+    force: "{{ filevault_keychain_file_override|bool }}"
+  when: filevault_keychain|bool and filevault_keychain_file|bool is defined and filevault_keychain_file | length > 0
   become: yes

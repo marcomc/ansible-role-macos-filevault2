@@ -1,34 +1,33 @@
 ---
-- block:
-  - name: Enable FileVault2
-    command:
-      argv:
-        - fdesetup
-        - enable
-        - "{{ '-outputplist'                 if ( filevault_outputplist|bool ) }}"
-        - "{{ '-forcerestart'                if ( filevault_forcerestart|bool ) }}"
-        - "{{ '-authrestart'                 if ( filevault_authrestart|bool ) }}"
-        - "{{ '-keychain'                    if ( filevault_keychain|bool ) }}"
-        - "{{ '-certificate'                 if ( filevault_certificate|bool and filevault_certificate_file | length > 0 ) }}"
-        - "{{ filevault_certificate_file     if ( filevault_certificate|bool and filevault_certificate_file | length > 0 ) }}"
-        - "{{ '-defer'                       if ( filevault_defer|bool ) }}"
-        - "{{ filevault_defer_file           if ( filevault_defer|bool ) }}"
-        - "{{ '-forceatlogin'                if ( filevault_defer|bool and filevault_forceatlogin|bool and filevault_max_cancel_attempts >= 0 ) }}"
-        - "{{ filevault_max_cancel_attempts  if ( filevault_defer|bool and filevault_forceatlogin|bool and filevault_max_cancel_attempts >= 0 ) }}"
-        - "{{ '-dontaskatlogout'             if ( filevault_defer|bool and filevault_dontaskatlogout|bool ) }}"
-        - "{{ '-showrecoverykey'             if ( filevault_defer|bool and filevault_showrecoverykey|bool ) }}"
-        - "{{ '-norecoverykey'               if ( filevault_norecoverykey|bool ) }}"
-        - "{{ '-forcerestart'                if ( filevault_forcerestart|bool ) }}"
-        - "{{ '-verbose'                     if ( verbose|bool ) }}"
-        - -inputplist
-      stdin: "{{ filevault_input_plist_content }}"
-    register: fdesetup_result
-    ignore_errors: yes
+- name: Enable FileVault2
+  command:
+    argv:
+      - fdesetup
+      - enable
+      - "{{ '-outputplist'                 if ( filevault_outputplist|bool ) }}"
+      - "{{ '-forcerestart'                if ( filevault_forcerestart|bool ) }}"
+      - "{{ '-authrestart'                 if ( filevault_authrestart|bool ) }}"
+      - "{{ '-keychain'                    if ( filevault_keychain|bool ) }}"
+      - "{{ '-certificate'                 if ( filevault_certificate|bool and filevault_certificate_file | length > 0 ) }}"
+      - "{{ filevault_certificate_file     if ( filevault_certificate|bool and filevault_certificate_file | length > 0 ) }}"
+      - "{{ '-defer'                       if ( filevault_defer|bool ) }}"
+      - "{{ filevault_defer_file           if ( filevault_defer|bool ) }}"
+      - "{{ '-forceatlogin'                if ( filevault_defer|bool and filevault_forceatlogin|bool and filevault_max_cancel_attempts >= 0 ) }}"
+      - "{{ filevault_max_cancel_attempts  if ( filevault_defer|bool and filevault_forceatlogin|bool and filevault_max_cancel_attempts >= 0 ) }}"
+      - "{{ '-dontaskatlogout'             if ( filevault_defer|bool and filevault_dontaskatlogout|bool ) }}"
+      - "{{ '-showrecoverykey'             if ( filevault_defer|bool and filevault_showrecoverykey|bool ) }}"
+      - "{{ '-norecoverykey'               if ( filevault_norecoverykey|bool ) }}"
+      - "{{ '-forcerestart'                if ( filevault_forcerestart|bool ) }}"
+      - "{{ '-verbose'                     if ( verbose|bool ) }}"
+      - -inputplist
+    stdin: "{{ filevault_input_plist_content }}"
+  register: fdesetup_result
+  ignore_errors: yes
   become: yes
 
 - debug:
     msg: "{{ fdesetup_result }}"
-  when: verbose | bool
+  when: verbose|bool
 
 - name: Storing the Personal Recovery Key in {{ filevault_recovery_key_output_file }}
   copy:

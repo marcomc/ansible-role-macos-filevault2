@@ -9,7 +9,7 @@
 - name: List of users status
   debug:
     var: command_results
-  when: verbose | bool
+  when: verbose|bool
 
 - name: FATAL - Additional uers list contains invalid usernames
   fail:
