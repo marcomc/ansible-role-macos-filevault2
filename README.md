@@ -10,6 +10,7 @@ This ansible role implements a subset of commands to `enable` (only) FileVault2 
         filevault_certificate: yes
         filevault_certificate_file: "/path/to/my/DER.cer"
         filevault_showrecoverykey: yes
+
     - hosts: localhost
       roles:
       - marcomc.macos_filevault2
