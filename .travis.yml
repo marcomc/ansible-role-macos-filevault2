@@ -7,7 +7,7 @@ osx_image:
   - xcode11.2
 
 language: python
-python: '3.8.5'
+python: '3.7'
 sudo: required
 install:
   - pip install --upgrade pip
