@@ -1,12 +1,14 @@
 ---
+os: osx
+osx_image:
+# OS X 10.15
+  - xcode12
+# OS X 10.14
+  - xcode11.2
+
 language: python
 python: '3.8.5'
 sudo: required
-addons:
-  apt:
-    sources:
-      - python-apt
-      - python-pycurl
 install:
   - pip install --upgrade pip
   - pip install ansible
