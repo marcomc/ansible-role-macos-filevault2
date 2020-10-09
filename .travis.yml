@@ -15,9 +15,9 @@ env:
     - TEST_ANSIBLE_HOSTNAME: localhost
       TEST_ANSIBLE_CONNECTION: local
 script:
-  - ansible-playbook -i tests/inventory tests/playbook.yml --syntax-check
-  - ansible-playbook -i tests/inventory tests/playbook.yml --list-tasks
-  - ansible-playbook -i tests/inventory tests/playbook.yml --become -vvvv
-  - 'ansible-playbook -i tests/inventory tests/playbook.yml --become | grep -q "changed=0.*failed=0" &&
+  - ansible-playbook -i test/inventory test/playbook.yml --syntax-check
+  - ansible-playbook -i test/inventory test/playbook.yml --list-tasks
+  - ansible-playbook -i test/inventory test/playbook.yml --become -vvvv
+  - 'ansible-playbook -i test/inventory test/playbook.yml --become | grep -q "changed=0.*failed=0" &&
     (echo "Idempotence test: pass" && exit 0) || (echo "Idempotence test: fail" && exit 1)'
 ...
