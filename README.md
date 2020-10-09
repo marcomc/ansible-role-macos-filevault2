@@ -1,3 +1,4 @@
+[![Build Status](https://api.travis-ci.com/marcomc/ansible-role-macos-filevault2.png)](https://www.travis-ci.com/github/marcomc/ansible-role-macos-filevault2/builds)
 # FileVault2 Ansible role
 
 This ansible role implements a subset of commands to `enable` (only) FileVault2 via `fdesetup` present on macOS v10.7 or newer systems.
