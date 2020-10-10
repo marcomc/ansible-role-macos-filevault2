@@ -19,6 +19,7 @@ env:
       PYTHON: 3.5.1
       ANSIBLE_BECOME_PASS: travis
 script:
+  - ansible-lint .
   - ansible-playbook -i test/inventory test/playbook.yml --syntax-check
   - ansible-playbook -i test/inventory test/playbook.yml --list-tasks
   - ansible-playbook -i test/inventory test/playbook.yml --connection=local -vvvv
