@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/marcomc/ansible-role-macos-filevault2.svg?branch=master)](https://travis-ci.org/marcomc/ansible-role-macos-filevault2)
+[![Build Status](https://travis-ci.com/marcomc/ansible-role-macos-filevault2.svg?branch=master)](https://travis-ci.com/marcomc/ansible-role-macos-filevault2)
 
 # FileVault2 Ansible role
 
