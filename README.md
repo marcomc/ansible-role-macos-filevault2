@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.com/marcomc/ansible-role-macos-filevault2.svg?branch=master)](https://travis-ci.com/marcomc/ansible-role-macos-filevault2)
 
-# FileVault2 Ansible role
+# FileVault2 Ansible role for macOS
 
-This ansible role implements a subset of commands to `enable` (only) FileVault2 via `fdesetup` present on macOS v10.7 or newer systems.
+This Ansible role implements a subset of commands to `enable` (only) FileVault2 via `fdesetup` present on macOS v10.7 or newer systems.
 
 Used in [Splinter, an opinionated provisioning tool for macOS](https://github.com/marcomc/splinter).
 
