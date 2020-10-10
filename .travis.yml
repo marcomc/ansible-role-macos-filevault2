@@ -6,16 +6,17 @@ osx_image:
 # OS X 10.14
   - xcode11.2
 
-language: python
-python: '3'
+language: generic
+
 sudo: required
 install:
-  - pip install --upgrade pip
-  - pip install ansible
+  - pip3 install --upgrade pip
+  - pip3 install ansible
 env:
   global:
     - TEST_ANSIBLE_HOSTNAME: localhost
       TEST_ANSIBLE_CONNECTION: local
+      PYTHON: 3.5.1
 script:
   - ansible-playbook -i test/inventory test/playbook.yml --syntax-check
   - ansible-playbook -i test/inventory test/playbook.yml --list-tasks
