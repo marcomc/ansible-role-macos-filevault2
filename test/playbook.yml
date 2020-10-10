@@ -4,7 +4,7 @@
     - add_host:
         groups: test
         name: "{{ lookup('env','TEST_ANSIBLE_HOSTNAME') }}"
-        changed_when: false
+      changed_when: false
 
 - hosts: test
   vars:
