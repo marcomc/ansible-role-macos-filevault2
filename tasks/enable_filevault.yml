@@ -22,6 +22,7 @@
       - -inputplist
     stdin: "{{ filevault_input_plist_content }}"
   register: fdesetup_result
+  when: not (fdesetup_status_result.stdout | regex_search("FileVault is On", ignorecase=True))
   ignore_errors: yes
   become: yes
 
