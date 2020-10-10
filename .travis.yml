@@ -11,7 +11,7 @@ language: generic
 sudo: required
 install:
   - pip3 install --upgrade pip
-  - pip3 install ansible
+  - pip3 install ansible ansible-lint
 env:
   global:
     - TEST_ANSIBLE_HOSTNAME: localhost
