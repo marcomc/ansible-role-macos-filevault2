@@ -9,6 +9,7 @@
   vars:
     verbose: yes
     filevault_showrecoverykey: yes
+    filevault_user_password: "{{ lookup('env','ANSIBLE_BECOME_PASS') if lookup('env','ANSIBLE_BECOME_PASS')|length > 0 else omit  }}"
 
   roles:
     - macos_filevault2
