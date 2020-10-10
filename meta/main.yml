@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Marco Massari Calderone <marco@marcomc.com>
   description: Ansible role to configure FileVault2 on macOS. Also used in Splinter provisioning tool.
